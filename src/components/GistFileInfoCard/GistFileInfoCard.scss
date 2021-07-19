@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.gist-file-info-card {
+    background: #fff;
+    display: flex;
+    padding: 10px;
+    justify-content: flex-start;
+    text-align: left;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+    
+    .gist-link {
+        display: flex;
+        width: 100%;
+        .info {
+            width: 30%;
+            .file-desc  {
+                margin:0;
+                margin-bottom: 10px; 
+            }
+        
+            .file-count {
+                margin:0;
+                font-size: 14px;
+                color: #2196f3;
+            }
+        }
+    }
+}
