@@ -3,9 +3,10 @@ import './SearchResult.scss';
 import { useSelector } from 'react-redux';
 
 import GistFileInfoCard from '../GistFileInfoCard';
+import Pagination from '../Pagination';
 
 function SearchResult() {
-	const {gists, username, error, isLoading} = useSelector((state) => state.userGists);
+	const {gists, username, error, isLoading, currentGistsData} = useSelector((state) => state.userGists);
 
 	// useEffect(() => {
 
@@ -28,12 +29,13 @@ function SearchResult() {
                         </p>
                     </div>
                     <ul className="result-list">
-                        {gists.map( gist => {
+                        {currentGistsData.map( gist => {
                             return (<GistFileInfoCard 
                                             key={gist.id} 
                                             gistData={gist}/>);
                         })}
                     </ul>
+					<Pagination totalCount={gists.length} data={gists} />
                 </>
             ) : (
                 <div className="error">

@@ -1,0 +1,14 @@
+.pagination-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    .page-number {
+        border: 1px solid #cecece;
+        border-radius: 5px;
+        padding: 5px 16px;
+        margin: 10px;
+        list-style: none;
+        cursor: pointer;
+    }
+}

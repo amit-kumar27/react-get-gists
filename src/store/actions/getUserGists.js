@@ -23,6 +23,14 @@ const onFailure = (err) => {
     }
 }
 
+export const updateCurrentPageAction = (pageNumber, currentData) => {
+    return {
+        type: 'UPDATE_CURRENT_PAGE',
+        pageNumber,
+        data: currentData
+    }
+}
+
 //thunk middleware action
 const getAllGists = (username) => {
     return function(dispatch) {
