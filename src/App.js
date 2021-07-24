@@ -10,9 +10,11 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-            <Route path="/" exact={true} component={SearchGistsView} />
-            {/* <Route path="/:id" component={GistDetails} /> */}
+            
+            <Route exact={true} path="/" component={SearchGistsView} />
             <Route component={NotFoundPage} />
+            {/* <Route path="/:id" component={GistDetails} /> */}
+            
         </Switch>
       </Router>
     </div>

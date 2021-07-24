@@ -2,35 +2,33 @@ import React, { useState } from 'react';
 import './SearchForm.scss';
 import { useDispatch } from 'react-redux';
 
-import SearchInput from './SearchInput';
-import { getAllGists } from '../../store/actions/getUserGists';
+import { getUserGists } from '../../store/actions/getUserGists';
 
 function SearchForm() {
   const [username, setUsername] = useState('');
   const dispatch = useDispatch();
 
-  const onInputValChange = (e) =>  {
-    const { value } = e.target;
-    setUsername(value);
-  }
-
   const onFormSubmit = (e) => {
     e.preventDefault();
     if(username.length) {
-      dispatch(getAllGists(username));
+      dispatch(getUserGists(username));
     }
   }
 
   return (
     <div className="search-form-container">
-      <form onSubmit={(e) => onFormSubmit(e)}>
+      <form id="search-form" onSubmit={(e) => onFormSubmit(e)}>
         <input 
+          id="username" 
           name="username" type="text" 
           placeholder="Enter username to search Gists for" 
-          onChange={(e) => onInputValChange(e)}/>
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+          autoComplete="off"/>
+        <button id="submit-btn"  type="submit" className="btn">Search</button>
       </form>
     </div>
   );
 }
 
-export default SearchForm;
+export default React.memo(SearchForm);

@@ -1,0 +1,28 @@
+.side-drawer {
+    width: 500px;
+
+    .gist-details {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+    }
+
+    .files-list {
+        list-style: none;
+        padding: 0;
+        margin-left: 20px;
+
+        .file-item {
+            margin-bottom: 10px;
+
+            .file-link {
+                font-size: 16px;
+                color: #2196f3;
+            }
+        }
+    }
+
+    .forks-details {
+        margin-top: 32px;
+    }
+}

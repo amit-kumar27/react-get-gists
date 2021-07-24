@@ -20,7 +20,7 @@ function Tags(props) {
 		<div className="tags">
             {
                 fileTypes.map( type => (
-                    <li className="tag">
+                    <li className="tag" key={type}>
                         {type}
                     </li>
                 ))
@@ -29,4 +29,4 @@ function Tags(props) {
 	);
 }
 
-export default Tags;
+export default React.memo(Tags);

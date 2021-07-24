@@ -17,5 +17,7 @@
     .result-list {
         list-style: none;
         padding: 0;
+        height: 450px;
+        overflow-y: scroll;
     }
 }

@@ -1,0 +1,14 @@
+.avatar-container {
+    display: flex;
+    align-items: center;
+    .avatar-img {
+        width: 62px;
+        height: 62px;
+        border-radius: 100%;
+    }
+
+    .username {
+        font-size: 16px;
+        margin-left: 10px;
+    }
+}

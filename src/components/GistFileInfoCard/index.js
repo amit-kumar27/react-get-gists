@@ -1,30 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './GistFileInfoCard.scss';
-import { Link } from 'react-router-dom'
 import Tags from '../Tags';
 
 function GistFileInfoCard(props) {
-    const {gistData} = props;
+    const { gistData, onGistCardClick } = props;
     const files = Object.keys(gistData.files);
 
-	return (
-		<div className="gist-file-info-card">
-            <Link to={{pathname: `/${gistData.id}`, state: {description: gistData.description, files: gistData.files}}} 
-                className="gist-link">
-                <div className="info">
-                    {
-                        files.map( filekey => (
-                            <li className="list-row">
-                                <p className="file-desc">{gistData.files[filekey].filename || '-'}</p>
-                            </li>
-                        ))
-                    }
-                    <p className="file-count">{files.length} {(files.length > 1) ? 'Files' : 'File'}</p>
+    return (
+        <>
+            <div id="info-card" className="gist-file-info-card" onClick={onGistCardClick}>
+                <div className="gist-data">
+                    <div className="info">
+                        {
+                            files.map((filekey, ind) => (
+                                <li className="list-row" key={filekey + '_' + ind} >
+                                    <p className="file-desc">{gistData.files[filekey].filename || '-'}</p>
+                                </li>
+                            ))
+                        }
+                        <p className="file-count">{files.length} {(files.length > 1) ? 'Files' : 'File'}</p>
+                    </div>
+                    <Tags files={gistData.files} />
                 </div>
-                <Tags files={gistData.files}/>
-            </Link>
-		</div>
-	);
+            </div>
+            
+        </>
+    );
 }
 
-export default GistFileInfoCard;
+export default React.memo(GistFileInfoCard);

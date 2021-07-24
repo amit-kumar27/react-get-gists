@@ -1,28 +1,32 @@
 import { get } from '../../fetch';
 
-//show loading message
-const beforeCall = () => {
+//action to show loader
+export const showLoader = () => {
     return {
-        type: 'BEFORE_ALL_GISTS'
+        type: 'SHOW_LOADER'
     }
 }
-const onSuccess = (dataObj, username) => {
-    //I can pass normalized data here
+
+// action to store the data after fetching Gists data
+export const userGistsSuccess = (data, username) => {
     return {
-        type: 'ALL_GISTS_SUCCESS',
-        payload: dataObj,
-        username: username,
+        type: 'USER_GISTS_SUCCESS',
+        data,
+        username,
         isLoading: false
     }
 }
-const onFailure = (err) => {
+
+// action to process the error while fetching Gists data
+export const userGistsError = (err) => {
     return {
-        type: 'ALL_GISTS_ERROR',
+        type: 'USER_GISTS_ERROR',
         errorMsg: err,
         isLoading: false
     }
 }
 
+// action to update the current page of Pagination 
 export const updateCurrentPageAction = (pageNumber, currentData) => {
     return {
         type: 'UPDATE_CURRENT_PAGE',
@@ -31,26 +35,19 @@ export const updateCurrentPageAction = (pageNumber, currentData) => {
     }
 }
 
-//thunk middleware action
-const getAllGists = (username) => {
+// middleware function to make API call 
+export const getUserGists = (username) => {
     return function(dispatch) {
-        dispatch(beforeCall());
-        //make the API call
-        return get(`https://api.github.com/users/${username}/gists`).then((res) => {
-            //console.log('Git Response', res);
-            if(res.length) {
-                //if there is data retured by Github API
-                dispatch(onSuccess(res, username));
-            } else {
-                dispatch(onFailure(`0 Gists Found for ${username}`));
-            }
-        }).catch((err) => {
-            //if network is down
-            //404 etc
-            //console.log('Error', err);
-            dispatch(onFailure(`Some problem while making call`)); //${err} - you can pass - optional
-        });
+        dispatch(showLoader());
+        //API GET call
+        return get(`https://api.github.com/users/${username}/gists`)
+                // if data fetched successfully
+                .then((res) => {
+                    dispatch(userGistsSuccess(res, username));
+                })
+                // if some error occurred in data fetching
+                .catch((err) => {
+                    dispatch(userGistsError('Something went wrong!')); 
+                });
     }
 }
-
-export {getAllGists};
